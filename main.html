@@ -37,34 +37,39 @@
   const stopButton = document.querySelector('#stop');
 	
   //Your code goes here
-	msg.text = document.querySelector('[name = "text"]').value;
-	function populateVoices() {
-		voices this.getVoices();
-		console.log((votces});
-		voicesDropdown.innerHTML = voices
-			.filter(voice => voice.lang.includes("en"))
-			.map(voice => `<option value = "${vnice.name}">${voice.name} (${voice.lang}`)
-			.join('');
-	}
-	function setVoice() {
-		msg.voice = voices.find(voice => voice.name == this.value);
-		toggle();
-	}
-		function toggle(startover  = true){
-			speechSynthesis.cancel();
-			if(startDver){
-				speechSynthesis.speak(eng)			
-		}
-	}
-	function setOption(){
-		msg[this.name] = this.value;
-		toggle();
-	}
-	speechSynthesis.addEventListener("voiceschanged", populateVoices);
-	voicesDropdown.addEventListener("change", setVoice);
-	speakButton.addEventListener("click", toggle);
-	stopflutton.addEventListener("click", () => toggle(false));
-	options.forEach((option) => option.addEventListener("change", setOption))
+	  //Your code goes here
+  msg.text = document.querySelector('[name="text"]').value;
+
+  function populateVoices() {
+    voices = this.getVoices();
+    voicesDropdown.innerHTML = voices
+      .filter(voice => voice.lang.includes('en'))
+      .map(voice => `<option value="${voice.name}">${voice.name} (${voice.lang})`)
+      .join('');
+  }
+
+  function setVoice() {
+    msg.voice = voices.find(voice => voice.name === this.value);
+    toggle();
+  }
+
+  function toggle(startOver = true) {
+    speechSynthesis.cancel();
+    if (startOver) {
+      speechSynthesis.speak(msg);
+    }
+  }
+
+  function setOption() {
+    msg[this.name] = this.value;
+    toggle();
+  }
+
+  speechSynthesis.addEventListener("voiceschanged", populateVoices);
+  voicesDropdown.addEventListener("change", setVoice);
+  speakButton.addEventListener("click", toggle);
+  stopButton.addEventListener("click", () => toggle(false));
+  options.forEach(option => option.addEventListener('change', setOption));
 
 </script>
 
